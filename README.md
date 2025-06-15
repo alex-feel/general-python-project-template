@@ -41,7 +41,7 @@ pytest -vv --junitxml=report.xml --cov=app --cov-report=xml --cov-report=term
 ## Using this template for your own project
 
 1. **Reset version to `0.0.0`.**
-   Update the following files so the Release Please starts versioning from scratch:
+   Update the following files so Release Please starts versioning from scratch:
 
    * `.release-please-manifest.json`
    * `pyproject.toml`
@@ -49,6 +49,21 @@ pytest -vv --junitxml=report.xml --cov=app --cov-report=xml --cov-report=term
 2. **Clean the changelog.**
    Remove everything in `CHANGELOG.md`.
 
-3. Replace placeholder metadata (`project_name`, author name, description) wherever it appears.
+3. **Replace placeholder metadata.**
+   Search for `project_name`, author name, description, etc., and update to match your project.
 
-That is all, you can now commit and start normal Release Please driven versioning.
+4. **Add GitHub tokens for Actions.**
+
+   | Secret name | Token scopes (Fine-grained) | Purpose |
+   |-------------|----------------------------|---------|
+   | `PRE_COMMIT_TOKEN` | *Repository permissions* → **Contents** → **Read** | Allows the “Run Pre-Commit” workflow to fetch the repo and run hooks. |
+   | `RELEASE_PLEASE_TOKEN` | *Repository permissions* → **Contents** → **Read & Write**<br>*Repository permissions* → **Pull requests** → **Read & Write** | Lets Release Please create release PRs, tags and update `uv.lock`. |
+
+   **How to create and add a token**
+
+   1. Go to **Settings → Developer settings → Personal access tokens → Fine-grained tokens**.
+   2. Click **Generate new token**, select the repository, set the scopes above, generate and copy the token.
+   3. Open **Repository → Settings → Secrets and variables → Actions**.
+   4. Add each token under **Repository secrets** with the exact names `PRE_COMMIT_TOKEN` and `RELEASE_PLEASE_TOKEN`.
+
+That’s all — commit your changes, push, and the GitHub Actions workflows will run out-of-the-box.
