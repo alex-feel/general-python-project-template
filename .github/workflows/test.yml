@@ -1,0 +1,43 @@
+name: Test
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    if: ${{ ! startsWith(github.head_ref, 'release-please--branches--') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install Python deps with uv
+        run: uv sync --all-extras --dev
+
+      - name: Expose .venv to PATH
+        run: echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+
+      - name: Run tests
+        run: uv run pytest -vv --junitxml=report.xml --cov=app --cov-report=xml --cov-report=term
+
+      - name: Surface tests
+        if: always()
+        uses: pmeier/pytest-results-action@main
+        with:
+          path: report.xml
+          summary: true
+          display-options: fEX

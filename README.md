@@ -1,0 +1,57 @@
+# Your Project
+
+## Local development
+
+### 1. Install tooling
+
+```commandline
+pip install -U uv
+```
+
+### 2. Install dependencies
+
+```commandline
+uv sync
+```
+
+### 3. Enable Git hooks
+
+```commandline
+pre-commit install
+pre-commit install --hook-type commit-msg --hook-type pre-push
+pre-commit autoupdate
+```
+
+Hooks include **Commitizen** (checks branch naming and commit messages).
+> [!NOTE] **First push:** upstream branch does not exist yet, Commitizen cannot resolve `origin/main`, so the *pre-push* hook fails. Push once with verification disabled, after that everything works as expected:
+
+```commandline
+git push -u origin main --no-verify
+```
+
+### 4. Running hooks manually
+
+```commandline
+pre-commit run --all-files
+```
+
+### 5. Running tests
+
+```commandline
+pytest -vv --junitxml=report.xml --cov=app --cov-report=xml --cov-report=term
+```
+
+## Using this template for your own project
+
+1. **Reset version to `0.0.0`.**
+   Update the following files so the Release Please starts versioning from scratch:
+
+   * `.release-please-manifest.json`
+   * `pyproject.toml`
+
+2. **Clean the changelog.**
+   Remove everything in `CHANGELOG.md`.
+
+3. Replace placeholder metadata (`project_name`, author name, description) wherever it appears.
+
+That is all, you can now commit and start normal Release Please driven versioning.

@@ -1,0 +1,51 @@
+[project]
+name = "project_name"
+version = "0.0.0"
+description = "Cool project description."
+readme = "README.md"
+authors = [{ name = "Your Name", email = "your@email.com" }]
+requires-python = ">=3.12"
+
+dependencies = [
+    "python-dotenv",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit",
+    "pytest-asyncio",
+    "pytest-cov",
+    "pytest",
+]
+
+[tool.ruff]
+# General settings
+target-version = "py312"
+line-length = 127
+
+[tool.ruff.lint]
+# Enable rule groups
+select = [
+  "E", "W", "F",  # basic Flake8
+  "I",  # isort (import order)
+  "Q",  # flake8-quotes
+  "SIM",  # flake8-simplify
+  "N",  # pep8-naming
+  "ARG",  # flake8-unused-arguments
+]
+
+# flake8-quotes: prefer single quotes
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+multiline-quotes = "single"
+docstring-quotes = "double"
+
+# isort subsection
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+force-single-line = true
+
+[tool.pytest.ini_options]
+# Use strict asyncio mode and explicitly specify fixture loop scope
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
