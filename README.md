@@ -18,7 +18,7 @@ uv sync
 
 ```commandline
 pre-commit install
-pre-commit install --hook-type commit-msg --hook-type pre-push
+pre-commit install --hook-type commit-msg
 pre-commit autoupdate
 ```
 
