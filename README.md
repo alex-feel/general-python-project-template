@@ -22,13 +22,6 @@ pre-commit install --hook-type commit-msg --hook-type pre-push
 pre-commit autoupdate
 ```
 
-Hooks include **Commitizen** (checks branch naming and commit messages).
-> [!NOTE] **First push:** upstream branch does not exist yet, Commitizen cannot resolve `origin/main`, so the *pre-push* hook fails. Push once with verification disabled, after that everything works as expected:
-
-```commandline
-git push -u origin main --no-verify
-```
-
 ### 4. Running hooks manually
 
 ```commandline
