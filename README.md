@@ -1,3 +1,7 @@
+![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)
+![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen.svg)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 # Your Project
 
 ## Local development
